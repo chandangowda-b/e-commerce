@@ -1,0 +1,77 @@
+.header-container {
+    width: 100%;
+    background: #4686c6f0;
+    color: rgb(231, 223, 223);
+    font-family: Arial;
+  }
+  
+  /* TOP NAV */
+  .top-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+  }
+  
+  /* LOGO */
+  .logo {
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  .logo span {
+    color: rgb(255, 0, 0);
+  }
+  
+  /* SEARCH BAR */
+  .search-box {
+    display: flex;
+    width: 65%;
+  }
+  
+  .search-box input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 25px;
+    border-radius: 4px 0 0 4px;
+  }
+  
+  .search-box button {
+    background: rgb(0, 94, 255);
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+  
+  /* ICONS RIGHT SIDE */
+  .nav-icons {
+    display: flex;
+    gap: 25px;
+    font-size: 22px;
+    cursor: pointer;
+  }
+  
+  /* CATEGORY NAV */
+  .category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    padding: 12px 0;
+    background: #1d3a48;
+  }
+  
+  .cat-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .cat-item:hover {
+    color: #ffd700;
+  }
+  
