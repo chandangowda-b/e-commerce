@@ -1,14 +1,19 @@
 import React from 'react'
 import Header from '../components/Header'
-import VideoSection from '../components/VideoSection'
+import FeaturedProducts from "../components/FeaturedProducts";
+import TopCategories from '../Components/TopCategories';
+import Footer from '../components/Footer';
+import StatsBar from '../components/StatBar';
+
 
 const Home = () => {
   return (
     <div>
         <Header/>
-
-        <VideoSection />
-        
+        <FeaturedProducts />
+        <TopCategories/>
+        <StatsBar/>
+        <Footer/>
     </div>
   )
 }
