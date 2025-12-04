@@ -1,10 +1,15 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
+import useStore from "../store/useStore";
 
-const CartPage = ({ cartItems, updateQuantity, removeItem }) => {
+const CartPage = () => {
+  const cart = useStore((s) => s.cart);
+  const updateCartQty = useStore((s) => s.updateCartQty);
+  const removeFromCart = useStore((s) => s.removeFromCart);
+
   // Calculate totals
-  const subtotal = cartItems.reduce(
-    (sum, item) => sum + item.price * item.quantity,
+  const subtotal = cart.reduce(
+    (sum, item) => sum + item.price * item.qty,
     0
   );
   const shipping = subtotal > 0 ? 120 : 0; // You can change logic
@@ -21,49 +26,45 @@ const CartPage = ({ cartItems, updateQuantity, removeItem }) => {
         
         {/* LEFT SECTION — ITEMS */}
         <div className="lg:col-span-2 space-y-6">
-          {cartItems.length === 0 ? (
+          {cart.length === 0 ? (
             <p className="text-lg opacity-80">Your cart is empty.</p>
           ) : (
-            cartItems.map((item) => (
+            cart.map((item) => (
               <div
                 key={item.id}
                 className="w-full bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl p-5 flex flex-col md:flex-row items-center gap-5 shadow-lg"
               >
                 <img
-                  src={item.image}
-                  alt={item.name}
+                  src={item.images?.[0] || item.image}
+                  alt={item.title || item.name}
                   className="w-28 h-28 object-cover rounded-lg"
                 />
 
                 {/* DETAILS */}
                 <div className="flex-1 w-full">
                   <h2 className="text-xl font-semibold mb-1">
-                    {item.name}
+                    {item.title || item.name}
                   </h2>
                   <p className="opacity-80 mb-3">
-                    {item.category}
+                    {item.category || "Car Part"}
                   </p>
 
                   {/* Quantity Control */}
                   <div className="flex items-center gap-3">
                     <button
-                      onClick={() =>
-                        updateQuantity(item.id, item.quantity - 1)
-                      }
-                      className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg"
+                      onClick={() => updateCartQty(item.id, item.qty - 1)}
+                      className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition"
                     >
                       -
                     </button>
 
                     <span className="px-4 py-1 bg-white/5 border border-white/10 rounded-lg">
-                      {item.quantity}
+                      {item.qty}
                     </span>
 
                     <button
-                      onClick={() =>
-                        updateQuantity(item.id, item.quantity + 1)
-                      }
-                      className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg"
+                      onClick={() => updateCartQty(item.id, item.qty + 1)}
+                      className="px-3 py-1 bg-white/10 border border-white/20 rounded-lg hover:bg-white/20 transition"
                     >
                       +
                     </button>
@@ -73,11 +74,11 @@ const CartPage = ({ cartItems, updateQuantity, removeItem }) => {
                 {/* PRICE AND REMOVE */}
                 <div className="flex flex-col items-end gap-4">
                   <p className="text-xl font-semibold">
-                    ₹{item.price * item.quantity}
+                    ₹{item.price * item.qty}
                   </p>
 
                   <button
-                    onClick={() => removeItem(item.id)}
+                    onClick={() => removeFromCart(item.id)}
                     className="p-2 bg-red-600/20 hover:bg-red-600/40 transition rounded-lg border border-red-500/30"
                   >
                     <FaTrashAlt className="text-red-400 text-lg" />

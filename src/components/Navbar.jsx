@@ -1,65 +1,15 @@
-// import { useState } from "react";
-// import { FiMenu, FiX } from "react-icons/fi";
-
-// export default function Navbar() {
-//   const [open, setOpen] = useState(false);
-
-//   const navItems = ["Home", "Shop", "About", "Contact"];
-
-//   return (
-//     <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-md">
-//       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-//         <h1 className="text-2xl font-bold text-white drop-shadow-lg tracking-wide">
-//           Auto<span className="text-blue-500">Parts</span>
-//         </h1>
-
-//         {/* Desktop Menu */}
-//         <ul className="hidden md:flex space-x-10 text-white font-medium">
-//           {navItems.map((item) => (
-//             <li
-//               key={item}
-//               className="hover:text-blue-500 transition duration-300 cursor-pointer"
-//             >
-//               {item}
-//             </li>
-//           ))}
-//         </ul>
-
-//         {/* Mobile Menu Icon */}
-//         <div
-//           className="md:hidden text-white text-3xl cursor-pointer"
-//           onClick={() => setOpen(!open)}
-//         >
-//           {open ? <FiX /> : <FiMenu />}
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu Dropdown */}
-//       {open && (
-//         <ul className="md:hidden bg-black/70 backdrop-blur-md text-white flex flex-col space-y-6 py-6 text-center transition-all duration-300">
-//           {navItems.map((item) => (
-//             <li
-//               key={item}
-//               className="hover:text-blue-500 cursor-pointer"
-//               onClick={() => setOpen(false)}
-//             >
-//               {item}
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </nav>
-//   );
-// }
-
 import React, { useState } from "react";
 import { FaSearch, FaUser, FaHeadset, FaShoppingCart, FaBars } from "react-icons/fa";
 import { TbCar } from "react-icons/tb";
 import { GiCarSeat, GiCarDoor, GiCarWheel, GiCarBattery, GiCarKey } from "react-icons/gi";
 import { MdLightbulb, MdCarRepair } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import useStore from "../store/useStore";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const cartCount = useStore((s) => s.cart.length);
 
   const categories = [
     { icon: <TbCar size={18} />, label: "Shop By Car" },
@@ -99,7 +49,17 @@ function Navbar() {
         <div className="hidden md:flex items-center gap-5 text-white font-medium">
           <FaUser className="hover:text-red-500 transition cursor-pointer" />
           <FaHeadset className="hover:text-red-500 transition cursor-pointer" />
-          <FaShoppingCart className="hover:text-red-500 transition cursor-pointer" />
+          <div 
+            className="relative cursor-pointer hover:text-red-500 transition"
+            onClick={() => navigate("/cart")}
+          >
+            <FaShoppingCart />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Mobile Menu Toggle */}

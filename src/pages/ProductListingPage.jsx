@@ -110,20 +110,18 @@
 //   );
 // }
 
-import { useAppContext } from "../context/AppContext";
+import useStore from "../store/useStore";
 import { useNavigate } from "react-router-dom";
 
 export default function ProductListing() {
-  const {
-    filteredProducts,
-    categories,
-    carBrands,
-    selectedCategory,
-    setSelectedCategory,
-    selectedBrand,
-    setSelectedBrand,
-    addToCart,
-  } = useAppContext();
+  const filteredProducts = useStore((s) => s.filteredProducts);
+  const categories = useStore((s) => s.categories);
+  const carBrands = useStore((s) => s.carBrands);
+  const selectedCategory = useStore((s) => s.selectedCategory);
+  const setSelectedCategory = useStore((s) => s.setSelectedCategory);
+  const selectedBrand = useStore((s) => s.selectedBrand);
+  const setSelectedBrand = useStore((s) => s.setSelectedBrand);
+  const addToCart = useStore((s) => s.addToCart);
 
   const navigate = useNavigate();
 
