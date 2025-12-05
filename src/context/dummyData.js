@@ -26,9 +26,7 @@ export const products = [
     price: 199,
     brand: "BMW",
     category: "Wheels",
-    images: [
-      productImages.wheel,
-    ],
+    images: [productImages.wheel],
     rating: 4.7,
     reviews: [
       { user: "John", comment: "Excellent quality!", rating: 5 },
@@ -56,38 +54,13 @@ export const products = [
     reviews: []
   },
   {
-    id: 4,
-    title: "Performance Alloy Wheel",
-    price: 199,
-    brand: "BMW",
-    category: "Wheels",
-    images: [
-      productImages.wheel
-    ],
-    rating: 4.7,
-    reviews: [
-      { user: "John", comment: "Excellent quality!", rating: 5 },
-      { user: "Rohit", comment: "Value for money.", rating: 4 }
-    ]
-  },
-  {
     id: 5,
     title: "Steering Wheel Cover",
     price: 249,
     brand: "Audi",
-    category: "Lights",
+    category: "Interior",
     images: [productImages.steeringWheel],
     rating: 4.4,
-    reviews: []
-  },
-  {
-    id: 6,
-    title: "Sport Exhaust System",
-    price: 399,
-    brand: "Mercedes",
-    category: "Exhaust",
-    images: [productImages.ses],
-    rating: 4.9,
     reviews: []
   }
 ];

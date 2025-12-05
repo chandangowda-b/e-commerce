@@ -8,18 +8,20 @@ import useStore from "../store/useStore";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const cartCount = useStore((s) => s.cart.length);
+  const setSearchQuery = useStore((s) => s.setSearchQuery);
 
   const categories = [
     { icon: <TbCar size={18} />, label: "Shop By Car" },
-    { icon: <GiCarSeat size={18} />, label: "Interior Accessories" },
-    { icon: <GiCarDoor size={18} />, label: "Exterior Accessories" },
-    { icon: <MdLightbulb size={18} />, label: "Car Lighting" },
-    { icon: <GiCarBattery size={18} />, label: "Car Utility" },
-    { icon: <GiCarWheel size={18} />, label: "Car Electronics" },
+    { icon: <GiCarSeat size={18} />, label: "Interior" },
+    { icon: <GiCarDoor size={18} />, label: "Exterior" },
+    { icon: <MdLightbulb size={18} />, label: "Lighting" },
+    { icon: <GiCarBattery size={18} />, label: "Utility" },
+    { icon: <GiCarWheel size={18} />, label: "Electronics" },
     { icon: <MdCarRepair size={18} />, label: "Car Parts" },
-    { icon: <GiCarKey size={18} />, label: "Car Care & Styling" }
+    { icon: <GiCarKey size={18} />, label: "Care & Styling" }
   ];
 
   return (
@@ -35,14 +37,25 @@ function Navbar() {
 
         {/* Search Box */}
         <div className="hidden md:flex flex-1 mx-5">
-          <input
-            type="text"
-            placeholder="Search for Seltos, Hycross, Creta, Nexon..."
-            className="flex-1 bg-white/10 border border-white/20 placeholder-gray-300 text-white rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-          />
-          <button className="bg-white/20 px-4 py-2 rounded-r-md hover:bg-red-500 hover:text-white transition">
-            <FaSearch size={18} />
-          </button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setSearchQuery(query);
+              navigate('/products');
+            }}
+            className="flex flex-1"
+          >
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              type="text"
+              placeholder="Search for Seltos, Hycross, Creta, Nexon..."
+              className="flex-1 bg-white/10 border border-white/20 placeholder-gray-300 text-white rounded-l-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+            />
+            <button type="submit" className="bg-white/20 px-4 py-2 rounded-r-md hover:bg-red-500 hover:text-white transition">
+              <FaSearch size={18} />
+            </button>
+          </form>
         </div>
 
         {/* Icons */}

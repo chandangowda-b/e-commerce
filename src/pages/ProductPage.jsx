@@ -124,6 +124,13 @@ export default function ProductPage() {
               Add to Cart
             </motion.button>
 
+            <button
+              onClick={() => navigate(`/live3d/${product.id}`)}
+              className="mt-4 w-full py-3 bg-white/10 hover:bg-white/20 text-sm rounded-xl border border-white/10"
+            >
+              Open 3D Editor
+            </button>
+
             {/* Specifications */}
             <div className="mt-10 p-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl">
               <h3 className="text-xl font-semibold mb-4">Specifications</h3>

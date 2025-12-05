@@ -40,3 +40,64 @@
 .read-the-docs {
   color: #888;
 }
+/* src/App.css */
+.page {
+  min-height: 100vh;
+  padding: 32px;
+  background: #f5f7fb;
+  font-family: system-ui, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+/* main horizontal bar */
+.main-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.main-bar-block {
+  position: relative;
+  background: linear-gradient(135deg, #4f8dfd, #1c55c4);
+  color: #fff;
+  padding: 16px 8px;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 4px;
+  box-shadow: 0 6px 0 #163c83;
+}
+
+/* sub vertical bars */
+.sub-bars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+.sub-column {
+  display: flex;
+  justify-content: center;
+}
+
+.sub-bar {
+  display: flex;
+  flex-direction: column-reverse; /* bottom to top */
+  gap: 8px;
+}
+
+.sub-bar-block {
+  position: relative;
+  width: 120px;
+  background: linear-gradient(135deg, #ffb443, #ff7a00);
+  color: #222;
+  padding: 8px 6px;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 3px;
+  box-shadow: 0 4px 0 #c06000;
+}

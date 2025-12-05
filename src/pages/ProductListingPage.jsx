@@ -126,7 +126,7 @@ export default function ProductListing() {
   const navigate = useNavigate();
 
   return (
-    <section className="min-h-screen bg-black text-white py-16 px-6">
+    <section className="min-h-screen bg-black text-white pt-28 pb-16 px-6">
       {/* Page Heading */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-extrabold tracking-wide">Car Parts Catalog</h1>

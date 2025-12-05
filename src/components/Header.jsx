@@ -111,8 +111,8 @@ export default function Header() {
           Premium Car Parts For Performance Enthusiasts
         </p>
 
-        <button onClick={()=>navigate("/products")} className="mt-8 px-8 py-3 bg-red-500 hover:bg-red-600 transition duration-300 rounded-full text-white font-semibold shadow-xl animate-fadeUp delay-500">
-          Explore Parts
+        <button onClick={()=>navigate("/live3d")} className="mt-8 px-8 py-3 bg-red-500 hover:bg-red-600 transition duration-300 rounded-full text-white font-semibold shadow-xl animate-fadeUp delay-500">
+          Live 3D modification
         </button>
       </div>
     </header>

@@ -11,6 +11,7 @@ const useStore = create((set, get) => ({
   // Filters
   selectedCategory: "All",
   selectedBrand: "All",
+  searchQuery: "",
 
   // Cart & Wishlist
   cart: [],
@@ -34,9 +35,24 @@ const useStore = create((set, get) => ({
     get().applyFilters();
   },
 
+  setSearchQuery: (q) => {
+    set({ searchQuery: q });
+    get().applyFilters();
+  },
+
   applyFilters: () => {
     const { allProducts, selectedCategory, selectedBrand } = get();
     let temp = [...allProducts];
+
+    const { searchQuery } = get();
+    if (searchQuery && searchQuery.trim() !== "") {
+      const q = searchQuery.toLowerCase();
+      temp = temp.filter(
+        (p) =>
+          (p.title && p.title.toLowerCase().includes(q)) ||
+          (p.description && p.description.toLowerCase().includes(q))
+      );
+    }
 
     if (selectedCategory !== "All") {
       temp = temp.filter((p) => p.category === selectedCategory);
