@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Strip */}
-      <div className="relative text-center mt-10 text-gray-500 text-sm">
+      <div className="relative text-center mt-5 text-gray-500 text-sm">
         © {new Date().getFullYear()} CarCare. All Rights Reserved.
       </div>
     </footer>

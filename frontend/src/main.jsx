@@ -3,11 +3,15 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
+import { SupportProvider } from './context/SupportContext.jsx'
 
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
-    <App />
+    <SupportProvider>
+      <App />
+    </SupportProvider>
+    
   </BrowserRouter>
   ,
 )

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaSearch, FaUser, FaHeadset, FaShoppingCart, FaBars } from "react-icons/fa";
+import { FaSearch, FaUser, FaHeadset, FaShoppingCart, FaBars, FaSignOutAlt } from "react-icons/fa";
 import { TbCar } from "react-icons/tb";
 import { GiCarSeat, GiCarDoor, GiCarWheel, GiCarBattery, GiCarKey } from "react-icons/gi";
 import { MdLightbulb, MdCarRepair } from "react-icons/md";
@@ -8,8 +8,12 @@ import useStore from "../store/useStore";
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
   const cartCount = useStore((s) => s.cart.length);
+  const isAuthenticated = useStore((s) => s.isAuthenticated);
+  const user = useStore((s) => s.user);
+  const logout = useStore((s) => s.logout);
 
   const categories = [
     { icon: <TbCar size={18} />, label: "Shop By Car" },
@@ -29,7 +33,7 @@ function Navbar() {
       <div className="flex items-center justify-between px-5 py-4">
         
         {/* Brand */}
-        <div className="text-2xl font-extrabold tracking-wide">
+        <div onClick={()=>navigate("/")} className="text-2xl font-extrabold tracking-wide cursor-pointer">
           Car<span className="text-red-500 drop-shadow-lg">Care</span>
         </div>
 
@@ -46,9 +50,68 @@ function Navbar() {
         </div>
 
         {/* Icons */}
-        <div className="hidden md:flex items-center gap-5 text-white font-medium">
-          <FaUser className="hover:text-red-500 transition cursor-pointer" />
-          <FaHeadset className="hover:text-red-500 transition cursor-pointer" />
+        <div className="hidden md:flex items-center gap-5 text-white font-medium relative">
+          {isAuthenticated ? (
+            <>
+              <div 
+                className="relative cursor-pointer group"
+                onMouseEnter={() => setProfileOpen(true)}
+                onMouseLeave={() => setProfileOpen(false)}
+              >
+                <div className="flex items-center gap-2 px-3 py-1 rounded-lg hover:bg-white/10 transition">
+                  <FaUser className="text-red-500" />
+                  <span className="text-sm">{user?.firstName}</span>
+                </div>
+                
+                {/* Profile Dropdown */}
+                {profileOpen && (
+                  <div className="absolute right-0 mt-2 w-48 bg-black/95 backdrop-blur-lg border border-white/20 rounded-lg shadow-lg overflow-hidden z-50">
+                    <div className="px-4 py-3 border-b border-white/10">
+                      <p className="font-semibold text-sm">{user?.firstName} {user?.lastName}</p>
+                      <p className="text-xs text-gray-400">{user?.email}</p>
+                    </div>
+                    <button 
+                      onClick={() => {
+                        navigate("/profile");
+                        setProfileOpen(false);
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm hover:bg-white/10 transition"
+                    >
+                      My Profile
+                    </button>
+                    <button 
+                      onClick={() => {
+                        logout();
+                        setProfileOpen(false);
+                        navigate("/");
+                      }}
+                      className="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-red-500/10 transition flex items-center gap-2"
+                    >
+                      <FaSignOutAlt size={14} />
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <button 
+                onClick={() => navigate("/login")}
+                className="px-4 py-2 rounded-lg hover:bg-white/10 transition text-sm"
+              >
+                Login
+              </button>
+              <button 
+                onClick={() => navigate("/register")}
+                className="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg transition text-sm font-semibold"
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+          
+          <FaHeadset onClick={()=>navigate("/helpcenter")} className="hover:text-red-500 transition cursor-pointer" />
           <div 
             className="relative cursor-pointer hover:text-red-500 transition"
             onClick={() => navigate("/cart")}
