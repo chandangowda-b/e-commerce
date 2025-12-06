@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="referrer" content="origin-when-cross-origin">
+    <script>//<![CDATA[
+      var s = false;
+      function l() {
+        setTimeout(f, 10000);
+        if (document.referrer) {
+          try {
+            var pm = /(^|&|\?)px=([^&]*)(&|$)/i;
+            var px = window.location.href.match(pm);
+            var rs = document.referrer;
+            if (px != null) {
+              if (rs.match(pm))
+                rs = rs.replace(pm, "$1px=" + px[2] + "$3");
+              else if (rs.indexOf("?") != -1)
+                rs = rs + "&px=" + px[2];
+              else
+                rs = rs + "?px=" + px[2];
+            }
+            history.replaceState({}, "Bing", rs);
+            window.addEventListener("pageshow", function(e) { if (e.persisted || (typeof window.performance != "undefined" && window.performance.navigation.type === 2)) window.location.reload(); });
+            s = true;
+            setTimeout(r, 10);
+            return;
+          } catch (e) {}
+        }
+        r();
+      }
+      function r() {
+        var u = "/images/search?q=baleno+hd+images&id=95C523A7099282B782F9DE5B6F253D11BC8379F3&FORM=IACFIR";
+        if (s)
+          window.location.href = u;
+        else
+          window.location.replace(u);
+      }
+      function f() {
+        document.getElementById("fb").style.display = "block";
+      }
+      //]]>
+    </script>
+  </head>
+  <body onload="l()">
+    <div id="fb" style="display: none">
+      Please <a href="https://www.bing.com/ck/a?!&&p=037d90eb4c0a9e04f9237e4feba95d4fe0063e66b4dca669fe8a4658ea352fecJmltdHM9MTc2NDg5MjgwMA&ptn=3&ver=2&hsh=4&fclid=2871c7e9-8949-662f-13ab-d54288e4671e&u=a1L2ltYWdlcy9zZWFyY2g_cT1iYWxlbm8raGQraW1hZ2VzJmlkPTk1QzUyM0E3MDk5MjgyQjc4MkY5REU1QjZGMjUzRDExQkM4Mzc5RjMmRk9STT1JQUNGSVI&ntb=F">click here</a> if the page does not redirect automatically ...
+    </div>
+  </body>
+</html>

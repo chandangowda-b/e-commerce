@@ -1,33 +1,45 @@
 import React, { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import useStore from '../store/useStore';
+import swiftImg from '../assets/cars/swift.jpeg';
+import tiagoImg from '../assets/cars/tiago.jpeg';
+import i20Img from '../assets/cars/i20.jpeg';
+import vernaImg from '../assets/cars/verna.jpeg';
+import virtusImg from '../assets/cars/virtnus.jpeg';
+import cityImg from '../assets/cars/city.jpeg';
+import xuv700Img from '../assets/cars/xuv700.jpeg';
+import cretaImg from '../assets/cars/creta.jpeg';
+import nexonImg from '../assets/cars/nexon.jpeg';
+import punchImg from '../assets/cars/punch.jpeg';
+import dzireImg from '../assets/cars/Dzira.jpeg';
+import balenoImg from '../assets/cars/baleno.jpeg';
 
 const CATEGORIES = [
   {
     type: 'Hatchback',
     models: [
-      { id: 'hatch-1', name: 'Swift' },
-      { id: 'hatch-2', name: 'Baleno' },
-      { id: 'hatch-3', name: 'Tiago' },
-      { id: 'hatch-4', name: 'i20' },
+      { id: 'hatch-1', name: 'Swift', image: swiftImg },
+      { id: 'hatch-2', name: 'Baleno', image: balenoImg },
+      { id: 'hatch-3', name: 'Tiago', image: tiagoImg },
+      { id: 'hatch-4', name: 'i20', image: i20Img },
     ],
   },
   {
     type: 'Sedan',
     models: [
-      { id: 'sedan-1', name: 'Dzire' },
-      { id: 'sedan-2', name: 'Verna' },
-      { id: 'sedan-3', name: 'Virtus' },
-      { id: 'sedan-4', name: 'City' },
+      { id: 'sedan-1', name: 'Dzire', image: dzireImg },
+      { id: 'sedan-2', name: 'Verna', image: vernaImg },
+      { id: 'sedan-3', name: 'Virtus', image: virtusImg },
+      { id: 'sedan-4', name: 'City', image: cityImg },
     ],
   },
   {
     type: 'SUV',
     models: [
-      { id: 'suv-1', name: 'XUV700' },
-      { id: 'suv-2', name: 'Creta' },
-      { id: 'suv-3', name: 'Nexon' },
-      { id: 'suv-4', name: 'Punch' },
+      { id: 'suv-1', name: 'XUV700', image: xuv700Img },
+      { id: 'suv-2', name: 'Creta', image: cretaImg },
+      { id: 'suv-3', name: 'Nexon', image: nexonImg },
+      { id: 'suv-4', name: 'Punch', image: punchImg },
     ],
   },
 ];
@@ -52,11 +64,24 @@ export default function Live3DPage() {
                   {cat.models.map((m) => (
                     <button
                       key={m.id}
-                      onClick={() => navigate(`/live3d/${m.id}`)}
-                      className="p-3 bg-white/6 hover:bg-white/10 rounded text-left"
+                      onClick={() => navigate(`/sub3d/${m.id}`)}
+                      className="flex flex-col items-start p-0 rounded-2xl overflow-hidden shadow-2xl transform transition duration-300 hover:-translate-y-2 hover:scale-105 border-2"
+                      style={{
+                        perspective: 800,
+                        borderColor: '#ef4444',
+                        backgroundImage: 'repeating-linear-gradient(45deg, rgba(0,0,0,0.65) 0 8px, rgba(255,255,255,0.02) 8px 16px)',
+                        backgroundSize: '16px 16px'
+                      }}
                     >
-                      <div className="font-medium">{m.name}</div>
-                      <div className="text-sm text-gray-300">{cat.type}</div>
+                      {m.image ? (
+                        <img src={m.image} alt={m.name} className="w-full h-32 object-cover" />
+                      ) : (
+                        <div style={{backgroundImage: 'repeating-linear-gradient(45deg, rgba(0,0,0,0.65) 0 8px, rgba(255,255,255,0.02) 8px 16px)', backgroundSize: '16px 16px'}} className="w-full h-32 flex items-center justify-center text-red-300">No image</div>
+                      )}
+                      <div className="p-3 w-full text-left bg-black/40">
+                        <div className="font-medium text-red-400">{m.name}</div>
+                        <div className="text-sm text-red-300">{cat.type}</div>
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -85,7 +110,7 @@ export default function Live3DPage() {
 
           <div className="mt-6 flex gap-3">
             <button onClick={() => navigate(-1)} className="px-4 py-2 bg-white/10 rounded">Back</button>
-            <button onClick={() => navigate(`/product/placeholder-${model.id}`)} className="px-4 py-2 bg-red-500 rounded">Open Editor (placeholder)</button>
+            <button onClick={() => navigate(`/sub3d/${model.id}`)} className="px-4 py-2 bg-red-500 rounded">Open Sub3D</button>
           </div>
         </div>
       </section>

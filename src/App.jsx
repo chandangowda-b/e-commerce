@@ -6,6 +6,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ProductListing from "./pages/ProductListingPage";
 import Live3DPage from "./pages/Live3DPage";
+import Sub3D from "./pages/Sub3D";
 import LoginPage from "./components/LoginPage";
 // src/App.jsx
 
@@ -92,6 +93,8 @@ function App() {
         <Route path="/live3d" element={<Live3DPage/>} />
         <Route path="/live3d/:id" element={<Live3DPage/>} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/sub3d" element={<Sub3D/>} />
+        <Route path="/sub3d/:id" element={<Sub3D/>} />
 
 
         
