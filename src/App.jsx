@@ -6,6 +6,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ProductListing from "./pages/ProductListingPage";
 import Live3DPage from "./pages/Live3DPage";
+import LoginPage from "./components/LoginPage";
 // src/App.jsx
 
 import "./App.css";
@@ -90,6 +91,7 @@ function App() {
     <Route path="/products" element={<ProductListing />} />
         <Route path="/live3d" element={<Live3DPage/>} />
         <Route path="/live3d/:id" element={<Live3DPage/>} />
+        <Route path="/login" element={<LoginPage />} />
 
 
         
