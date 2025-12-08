@@ -3,21 +3,23 @@ import { GiCarSeat, GiCarDoor, GiCarWheel, GiCarBattery, GiCarKey } from "react-
 import { TbCar } from "react-icons/tb";
 import { MdLightbulb, MdCarRepair } from "react-icons/md";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import useStore from "../store/useStore";
 import BrandModal from "./BrandModal";
 
 const categories = [
-  { icon: <TbCar size={40} />, label: "Shop By Car" },
-  { icon: <GiCarSeat size={40} />, label: "Interior" },
-  { icon: <GiCarDoor size={40} />, label: "Exterior" },
-  { icon: <MdLightbulb size={40} />, label: "Lighting" },
-  { icon: <GiCarBattery size={40} />, label: "Utility" },
-  { icon: <GiCarWheel size={40} />, label: "Electronics" },
-  { icon: <MdCarRepair size={40} />, label: "Car Parts" },
-  { icon: <GiCarKey size={40} />, label: "Care & Styling" },
+  { icon: <TbCar size={40} />, label: "Shop By Car", link: "/shop-by-car" },
+  { icon: <GiCarSeat size={40} />, label: "Interior", link: "/interior" }, // 2. Add link here
+  { icon: <GiCarDoor size={40} />, label: "Exterior", link: "/exterior" },
+  { icon: <MdLightbulb size={40} />, label: "Lighting", link: "/lighting" },
+  { icon: <GiCarBattery size={40} />, label: "Utility", link: "/utility" },
+  { icon: <GiCarWheel size={40} />, label: "Electronics", link: "/electronics" },
+  { icon: <MdCarRepair size={40} />, label: "Car Parts", link: "/parts" },
+  { icon: <GiCarKey size={40} />, label: "Care & Styling", link: "/styling" },
 ];
 
 export default function TopCategories() {
+  const navigate = useNavigate(); // 3. Initialize hook
   const carBrands = useStore((s) => s.carBrands || []);
   const allProducts = useStore((s) => s.allProducts || []);
   const [modalOpen, setModalOpen] = useState(false);
@@ -46,6 +48,7 @@ export default function TopCategories() {
     const left = direction === "next" ? amount : -amount;
     el.scrollBy({ left, behavior: "smooth" });
   };
+
   return (
     <section className="bg-black text-white py-20 relative">
       <div className="text-center mb-12">
@@ -61,6 +64,13 @@ export default function TopCategories() {
         {categories.map((item, i) => (
           <motion.div
             key={i}
+            // 4. Add Click Handler
+            onClick={() => {
+                if (item.link) {
+                    navigate(item.link);
+                    window.scrollTo(0, 0); // Scroll to top on navigation
+                }
+            }}
             whileHover={{
               scale: 1.17,
               rotateX: 12,
@@ -83,7 +93,7 @@ export default function TopCategories() {
         ))}
       </div>
 
-      {/* Shop By Brand: moved here from main Featured section */}
+      {/* Shop By Brand Section (Unchanged) */}
       <div className="max-w-6xl mx-auto mt-12 px-6">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-extrabold tracking-wide">🚗 Shop By Brand</h2>
@@ -145,7 +155,6 @@ export default function TopCategories() {
         )}
       </div>
 
-      {/* Soft glow background effects */}
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <div className="w-72 h-72 bg-red-600 opacity-10 blur-[120px] absolute -top-20 -left-20"></div>
         <div className="w-72 h-72 bg-blue-600 opacity-10 blur-[120px] absolute bottom-0 right-0"></div>

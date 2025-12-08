@@ -1,108 +1,65 @@
-import { Routes,Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
 import Navbar from "./components/Navbar";
+
+// Pages
 import Home from "./pages/Home";
 import ProductPage from "./pages/ProductPage";
 import CartPage from "./pages/CartPage";
 import ProductListing from "./pages/ProductListingPage";
 import Live3DPage from "./pages/Live3DPage";
 import Sub3D from "./pages/Sub3D";
+
+// Components
 import LoginPage from "./components/LoginPage";
-// src/App.jsx
+import Interior from "./components/Interior";
+import UserProfile from "./components/UserProfile";      // <--- Added
+import SignupSuccess from "./components/SignupSuccess"; // <--- Added
 
 import "./App.css";
 
-const data = [
+// Static cart data (Consider moving this to your useStore later)
+const cart = [
   {
-    type: "Hatchback",
-    models: ["Swift", "Baleno", "Tiago", "i20"],
-  },
-  {
-    type: "Sedan",
-    models: ["Dzire", "Verna", "Virtus", "City"],
-  },
-  {
-    type: "SUV",
-    models: ["XUV700", "Creta", "Nexon", "Punch"],
-  },
-  {
-    type: "MUV",
-    models: ["Ertiga", "Carens", "Innova", "Triber"],
-  },
+    id: "p1",
+    name: "Performance Air Filter",
+    price: 2499,
+    quantity: 1,
+    image: "/images/filter.png",
+    category: "Engine Parts"
+  }
 ];
 
-function CarModelsPreview() {
-  return (
-    <div className="page">
-      <h1 className="title">Car Models</h1>
-
-      {/* Main 3D bar */}
-      <div className="main-bar">
-        {data.map((item) => (
-          <div key={item.type} className="main-bar-block">
-            <span>{item.type}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Sub 3D bars */}
-      <div className="sub-bars">
-        {data.map((item) => (
-          <div key={item.type} className="sub-column">
-            <div className="sub-bar">
-              {item.models.map((m) => (
-                <div key={m} className="sub-bar-block">
-                  <span>{m}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-
-
-const cart = [
-  
-
-  {
-  id: "p1",
-  name: "Performance Air Filter",
-  price: 2499,
-  quantity: 1,
-  image: "/images/filter.png",
-  category: "Engine Parts"
-}
-
-]
-
 function App() {
-  
   return (
     <ErrorBoundary>
       <div>
         <Navbar />
         <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/product/:id" element={<ProductPage/>} />
-        <Route path="/cart" element={<CartPage cartItems={cart}/>} />
-    <Route path="/products" element={<ProductListing />} />
-        <Route path="/live3d" element={<Live3DPage/>} />
-        <Route path="/live3d/:id" element={<Live3DPage/>} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/sub3d" element={<Sub3D/>} />
-        <Route path="/sub3d/:id" element={<Sub3D/>} />
+          {/* Main Pages */}
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductListing />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/cart" element={<CartPage cartItems={cart} />} />
+          
+          {/* 3D Features */}
+          <Route path="/live3d" element={<Live3DPage />} />
+          <Route path="/live3d/:id" element={<Live3DPage />} />
+          <Route path="/sub3d" element={<Sub3D />} />
+          <Route path="/sub3d/:id" element={<Sub3D />} />
 
+          {/* Categories */}
+          <Route path="/interior" element={<Interior />} />
 
-        
+          {/* Authentication & Profile Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/profile" element={<UserProfile />} />          {/* <--- New Route */}
+          <Route path="/signup-success" element={<SignupSuccess />} /> {/* <--- New Route */}
 
         </Routes>
       </div>
     </ErrorBoundary>
-  )
+  );
 }
 
-export default App
+export default App;
